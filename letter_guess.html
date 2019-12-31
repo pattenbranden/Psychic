@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Welcome to the psychic letter game!</h1>
+    <p>Guess what letter I'm thinking of!</p>
+    <p>You guessed: <p id = "guess"></p></p>
+    <p>Wins: <p id = "wins"></p></p>
+    <p>Attempts remaining: <p id = "losses"></p></p>
+    <p>So far you've tried: <p id = "array"></p></p>
+    <script>
+        // variables for lastguess, total guesses, correct answer, wins, losses, remaining tries. 
+            var wins = 0;
+            var remainingAttempts = 0;
+            var guesses = [];
+            var lastGuess = "q";
+            var randomLetter;
+            var validGuesses = ["a","b","c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+
+
+        document.onkeyup = function(event) {
+            if (remainingAttempts == 0){
+                reset();
+                
+                function reset() {
+                    console.log("Resetting!")
+                    remainingAttempts = 12;
+                    wins = 0;
+                    guesses = [];
+                    lastGuess = "";
+                    document.querySelector("#guess").innerHTML = ("")
+                    document.querySelector("#array").innerHTML = (guesses)
+                    document.querySelector("#wins").innerHTML = (wins)
+                    document.querySelector("#losses").innerHTML = (remainingAttempts)
+                    generateLetter();
+                }
+            }
+                
+            lastGuess = event.key.toLowerCase()
+            
+                if (validGuesses.includes(lastGuess)) {
+                
+                    document.querySelector("#guess").innerHTML = (lastGuess);
+
+                                // here we record wins
+                            if (I == lastGuess) {
+                                wins++;
+                                generateLetter();
+                                guesses = [];
+                                console.log("Score!");
+                                document.querySelector("#wins").innerHTML = (wins)
+                                remainingAttempts = 13;
+
+                            };
+
+                            // and here we record failed guesses 
+
+                if (guesses.includes(lastGuess)) {
+                    alert("You've already guessed " + lastGuess);
+
+                    } else { 
+                        guesses.push(lastGuess);
+                        remainingAttempts--;
+                        document.querySelector("#array").innerHTML = (guesses);
+                        document.querySelector("#losses").innerHTML = (remainingAttempts);
+                    }
+                }
+                
+                    // this function generates the letter 
+                function generateLetter() {
+                    console.log("Picking a new letter..")
+                    I = validGuesses[Math.floor(Math.random()*validGuesses.length)];
+                    console.log("I chose... " + I + "!")
+                }
+
+                                      
+            }        
+            //Determin win
+                //if win
+                    //wins++
+                    // function generateLetter
+                    // reset game
+
+            //Determin Loss
+                //if loss
+                    //tries--
+                        //if tries = 0
+                            //generateLetter
+                            //reset game
+
+            
+        </script>
+    
+</body>
+</html>
